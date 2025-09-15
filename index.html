@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NADOH A-Kamaroudine - Développeur Full Stack</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            animation: float 3s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .header-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .header-info .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            animation: slideInLeft 1s ease-out 0.2s both;
+        }
+
+        .header-info .description {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            animation: slideInLeft 1s ease-out 0.4s both;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #333;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 0;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        section:nth-child(even) {
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .about-highlight {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        /* Compétences */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Projets */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-subtitle {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-description {
+            margin-bottom: 1.5rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: #f8f9fa;
+            color: #667eea;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid #e9ecef;
+        }
+
+        /* Expérience */
+        .experience-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .experience-item {
+            position: relative;
+            margin-bottom: 3rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 2rem;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .experience-date {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-company {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        /* Formation */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .education-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+
+        .education-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .education-year {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-degree {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-school {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .education-details {
+            font-size: 0.9rem;
+            color: #777;
+            font-style: italic;
+        }
+
+        /* New Sections Styles */
+        .new-section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .new-section-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .new-section-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .new-section-item h3 {
+            color: #667eea;
+            margin-bottom: 0.7rem;
+            font-size: 1.2rem;
+        }
+
+        .new-section-item p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .language-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .language-item span:first-child {
+            font-size: 1.8rem;
+            /* Icon size */
+        }
+
+        .strength-item {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .strength-item::before {
+            content: '💪';
+            /* Unicode character for strength/muscle */
+            font-size: 1.5rem;
+            color: #764ba2;
+        }
+
+        /* Contact */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-info h1 {
+                font-size: 2rem;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .skills-grid,
+            .projects-grid,
+            .education-grid,
+            .new-section-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="profile-img"> <img src="avatar.jpg" alt="A-Kamaroudine NADOH" /> </div>
+                <div class="header-info">
+                    <h1>A-Kamaroudine NADOH</h1>
+                    <div class="subtitle">Développeur Full Stack</div>
+                    <div class="description">
+                        Ingénieur passionné par le développement web et mobile, je conçois des solutions modernes,
+                        performantes et sécurisées. <br>
+                        Mon objectif : transformer des idées en applications innovantes et évolutives, adaptées aussi
+                        bien au secteur public qu’au privé.
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <a href="#accueil" class="nav-link active">Accueil</a>
+                <a href="#competences" class="nav-link">Compétences</a>
+                <a href="#projets" class="nav-link">Projets</a>
+                <a href="#experience" class="nav-link">Expérience</a>
+                <a href="#formation" class="nav-link">Formation</a>
+                <a href="#langues" class="nav-link">Langues</a>
+                <a href="#forces" class="nav-link">Forces</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="accueil">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">À Propos</h2>
+            <div class="about-content animate-on-scroll">
+                <p>
+                    <span class="about-highlight">Ingénieur Développeur d'Applications</span>, passionné par
+                    l'innovation et la transformation digitale. Je conçois des solutions robustes, sécurisées et
+                    adaptées aux enjeux stratégiques.
+                </p>
+                <br>
+                <p>
+                    <span class="about-highlight">Curieux, visionnaire et persévérant</span>, j'excelle à collaborer
+                    avec des équipes pluridisciplinaires pour concrétiser des projets ambitieux.
+                </p>
+            </div>
+
+
+        </div>
+    </section>
+
+    <section id="competences">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Compétences Techniques</h2>
+            <div class="skills-grid">
+                <div class="skill-category animate-on-scroll">
+                    <h3>🚀 Langages & Frameworks</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Java (SpringBoot)</span>
+                        <span class="skill-tag">Php (Laravel)</span>
+                        <span class="skill-tag">Bootstrap & Jquery</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">Vue.js</span>
+                        <span class="skill-tag">Angular</span>
+                        <span class="skill-tag">Apache Wicket</span>
+                        <span class="skill-tag">Dart (Flutter)</span>
+                    </div>
+                </div>
+                <div class="skill-category animate-on-scroll">
+                    <h3>🗄️ Bases de Données</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">SQL Server</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">SQLite</span>
+                        <span class="skill-tag">Firebase</span>
+                        <!-- <span class="skill-tag">Cassandra</span> -->
+                        <span class="skill-tag">Redis</span>
+
+
+
+                    </div>
+                </div>
+                <div class="skill-category animate-on-scroll">
+                    <h3>📂 Gestion & Versionning</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">GitLab</span>
+                        <span class="skill-tag">Bitbucket</span>
+                        <span class="skill-tag">Jira</span>
+                        <span class="skill-tag">Trello</span>
+                        <span class="skill-tag">Confluence</span>
+                        <span class="skill-tag">Slack</span>
+                        <span class="skill-tag">Mattermost</span>
+                    </div>
+                </div>
+
+                <div class="skill-category animate-on-scroll">
+                    <h3>☁️ Services & Cloud</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Google Cloud</span>
+                        <span class="skill-tag">Microsoft Azure</span>
+                        <span class="skill-tag">Heroku</span>
+                        <span class="skill-tag">OVH Cloud</span>
+                        <span class="skill-tag">DigitalOcean</span>
+                        <span class="skill-tag">Cloudinary</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="projets">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Projets Réalisés</h2>
+            <div class="projects-grid">
+                <div class="project-card animate-on-scroll">
+                    <div class="project-header">
+                        <div class="project-title">PERFECT-VISION & Reporting</div>
+                        <div class="project-subtitle">
+                            Logiciel de Gestion Intégré des Systèmes Financiers Décentralisés (SFD) <br>
+                            Développé par CAGECFI SA
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-description">
+                            Conception, développement et évolution de <strong>PERFECT-VISION & Reporting</strong>,
+                            une solution intégrée destinée aux Systèmes Financiers Décentralisés (SFD).
+                            L’application permet la gestion complète des opérations financières, le suivi en temps réel
+                            des activités,
+                            la production de rapports réglementaires et analytiques, ainsi que l’amélioration de la
+                            transparence
+                            et de la prise de décision grâce à des mises à jour fonctionnelles continues.
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Spring Boot</span>
+                            <span class="tech-tag">Apache Wicket</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">SqlServer</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll">
+                    <div class="project-header">
+                        <div class="project-title">SOLAF</div>
+                        <div class="project-subtitle">Gestion du Budget de l'État <br> Développé par Next Genertion
+                            Services</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-description">
+                            Conception, évolution et maintenance de l’application de gestion du Budget de l'État
+                            Togolais
+                            pour le Ministère de l'Économie et des Finances.
+                            Contribution à l’optimisation des processus budgétaires, à l’amélioration de la transparence
+                            et à la réduction des délais de traitement grâce à des mises à jour fonctionnelles et
+                            techniques régulières.
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Spring Boot</span>
+                            <span class="tech-tag">Angular</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">JasperReport</span>
+                            <span class="tech-tag">Liquibase</span>
+                            <span class="tech-tag">Maven</span>
+                            <span class="tech-tag">JPA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll">
+                    <div class="project-header">
+                        <div class="project-title">ZPAY</div>
+                        <div class="project-subtitle">Paiement Mobile <br> Développé par Next Generation Services</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-description">
+                            Développement et amélioration continue de l’application de paiement mobile du Ministère de
+                            l'Économie et des Finances.
+                            Apports majeurs dans l’optimisation du recouvrement des dettes de l'État, l’automatisation
+                            des paiements,
+                            ainsi que le renforcement de la transparence et de la sécurité via des mises à jour
+                            évolutives.
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">NestJS</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Redis</span>
+                            <span class="tech-tag">Swagger</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll">
+                    <div class="project-header">
+                        <div class="project-title">ZGATE</div>
+                        <div class="project-subtitle">Gestion Factures Phytosanitaires <br> Développée par Next
+                            Generation Services</div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-description">
+                            Conception et développement de l'application de gestion des factures phyto-sanitaires pour
+                            le Ministère de l'Agriculture.
+                            Digitalisation du processus de facturation et amélioration de l'efficacité du recouvrement.
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Spring Boot</span>
+                            <span class="tech-tag">Angular</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Maven</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card animate-on-scroll">
+                    <div class="project-header">
+                        <div class="project-title">cPAY</div>
+                        <div class="project-subtitle">Application Mobile <br> Développée par Next Generation Services
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-description">
+                            Conception, développement et évolution de <strong>cPAY</strong>, une application mobile de
+                            paiement
+                            destinée au grand public.
+                            L’application permet la gestion des comptes utilisateurs, des transactions, des
+                            portefeuilles électroniques
+                            ainsi que de différents services financiers.
+                            Elle intègre également un module d’événements (ex. concerts) avec la possibilité de scanner
+                            des QR codes
+                            pour valider l’accès.
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Darte</span>
+                            <span class="tech-tag">Fast API</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="project-card animate-on-scroll">
+                    <div class="project-header">
+                        <div class="project-title">Atiko - Travels</div>
+                        <div class="project-subtitle">
+                            Application Web et Android de Location de Voitures et Tickets de Bus
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-description">
+                            Conception et développement d’une application web et mobile (<strong>Android</strong>)
+                            pour la gestion des locations de voitures et la réservation de tickets de bus.
+                            L’application permet la consultation des véhicules disponibles, la réservation en ligne,
+                            le suivi des transactions et la gestion des utilisateurs pour une expérience fluide et
+                            sécurisée.
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Spring Boot</span>
+                            <span class="tech-tag">Angular.js</span>
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card animate-on-scroll">
+                    <div class="project-header">
+                        <div class="project-title"> Business Help Consulting (BHC)</div>
+                        <div class="project-subtitle">
+                            Incubateur et cabinet de conseil pour entrepreneurs et startups au Togo
+
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-description">
+                            Accompagnement des porteurs de projets et des entreprises innovantes à travers des services
+                            de <strong>pré-incubation</strong>, <strong>incubation</strong> et
+                            <strong>accélération</strong>.
+                            BHC offre également la domiciliation d’entreprise (physique ou virtuelle), la location
+                            d’espaces de coworking, le mentoring, la formation et le conseil stratégique pour soutenir
+                            le
+                            développement durable des initiatives entrepreneuriales au Togo et dans la sous-région.
+                            <br> <a href="https://businesshelpconsulting.com" target="_blank" class="visit-link">
+                                Visiter le site <span class="arrow">→</span>
+                            </a>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Spring Boot</span>
+                            <span class="tech-tag">Angular</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Maven</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="project-card animate-on-scroll">
+                    <div class="project-header">
+                        <div class="project-title">CafeJ Togo</div>
+                        <div class="project-subtitle">
+                            Espace communautaire et culturel / café-lieu d’échange au Togo
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-description">
+                            Un lieu dédié à la culture, aux rencontres et à l’engagement social, proposant des
+                            événements
+                            artistiques, des ateliers de formation, des activités communautaires et un espace café
+                            convivial.
+                            Cafe J Togo facilite les échanges entre artistes, jeunes et acteurs locaux, et encourage
+                            l’innovation sociale à travers ses programmes et initiatives. <br>
+                            <a href="https://cafejtogo.org" target="_blank" class="visit-link">
+                                Visiter le site <span class="arrow">→</span>
+                            </a>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Expérience Professionnelle</h2>
+            <div class="experience-timeline">
+
+                <!-- CAGECFI -->
+                <div class="experience-item animate-on-scroll">
+                    <div class="experience-date">Depuis Mars 2025</div>
+                    <div class="experience-title">Développeur Full Stack</div>
+                    <div class="experience-company">CAGECFI SA</div>
+                    <div class="experience-description">
+                        Participation au développement et à l’adaptation du modèle de <strong>reporting</strong> de
+                        <strong> Perfect Vision</strong>,
+                        répondant aux exigences réglementaires de la <strong>BCEAO</strong>, de la
+                        <strong>CEMAC</strong> et de la <strong>BRB</strong>.
+
+                        Contribution active à la création de <strong>FNFI Agrégation</strong>, une plateforme
+                        centralisant les données
+                        pour une meilleure exploitation.
+
+                        Optimisation de la production de statistiques à partir des données collectées pour améliorer la
+                        prise de décision.
+
+                        Collaboration avec l’équipe pour renforcer l’intégration et la fiabilité des fonctionnalités de
+                        la plateforme.
+                    </div>
+                </div>
+
+                <!-- Next Generation Services (NGS) -->
+                <div class="experience-item animate-on-scroll">
+                    <div class="experience-date">Mars 2023 - Janvier 2025</div>
+                    <div class="experience-title">Développeur Full Stack</div>
+                    <div class="experience-company">Next Generation Services (NGS)</div>
+                    <div class="experience-description">
+                        Participé activement à l'élaboration de stratégies pour perfectionner les solutions de
+                        l'entreprise.<br>
+                        Développé et ajusté des fonctionnalités tout en modernisant divers systèmes tels que
+                        <strong>SOLAF, NextFrame et Z-Gate</strong> pour le secteur public.<br>
+                        Collaboré avec les équipes internes pour assurer la mise à jour et la conformité des systèmes
+                        aux besoins des ministères et collectivités.<br>
+                        Participation à la mise en place de l'application <strong>cPay</strong> (Portefeuille, règlement
+                        factures et billetterie).
+                    </div>
+                </div>
+
+                <!-- PassPartouts Solutions (PPS) -->
+                <div class="experience-item animate-on-scroll">
+                    <div class="experience-date">Janvier 2021 - Janvier 2023</div>
+                    <div class="experience-title">Développeur Full Stack Junior</div>
+                    <div class="experience-company">PassPartouts Solutions (PPS)</div>
+                    <div class="experience-description">
+                        Supervisé la conception de solutions intégrées incluant divers modules comme la planification et
+                        le suivi des évaluations de recrutement.<br>
+                        Déployé et maîtrisé l'utilisation des <strong>API REST</strong> pour la plateforme
+                        <strong>MYPP</strong> (solution monétique).<br>
+                        Assuré l'harmonisation des modules pour garantir une intégration fluide de
+                        <strong>MyDacre</strong> (plateforme de e-santé).
+                    </div>
+                </div>
+                <!-- Perso et freelance -->
+                <div class="experience-item animate-on-scroll">
+                    <div class="experience-date">2021 - Présent</div>
+                    <div class="experience-title">Projets Personnels & Freelance</div>
+                    <div class="experience-company">Clients divers : BHC, CafeJ Togo, Atiko, et autres</div>
+                    <div class="experience-description">
+                        Conception et développement de sites web et applications pour des projets variés, incluant :<br>
+                        • <strong><a href="https://businesshelpconsulting.com" target="_blank">Business Help Consulting
+                                (BHC)</a></strong> : site vitrine et outils pour l’accompagnement
+                        des startups et entrepreneurs.<br>
+                        • <strong><a href="https://cafejtogo.org" target="_blank">CafeJ Togo</a></strong> : site de
+                        présentation et gestion d’événements culturels.<br>
+                        • <strong><a href="https://www.loftsdulacdessables.com" target="_blank">Atiko</a></strong> :
+                        solutions web et mobiles pour la réservation de voitures et tickets de bus.<br>
+                        Gestion complète du cycle de vie des projets, de la conception à la mise en ligne,
+                        intégration de <strong>front-end</strong>, <strong>back-end</strong>, et déploiement.
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+    <section id="formation">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Formation</h2>
+            <div class="education-grid">
+                <div class="education-card animate-on-scroll">
+                    <div class="education-year">2024</div>
+                    <div class="education-degree">Master 1 en Big Data et Intelligence Artificielle</div>
+                    <div class="education-school">ESGIS - Togo</div>
+                    <div class="education-details">
+                        Date d'obtention : 07 juin 2024<br>
+                    </div>
+                </div>
+
+
+                <div class="education-card animate-on-scroll">
+                    <div class="education-year">2021</div>
+                    <div class="education-degree">Licence Professionnelle en Architecture des Logiciels</div>
+                    <div class="education-school">ESGIS - Togo</div>
+                    <div class="education-details">
+                        Date d'obtention : 12 juin 2021<br>
+                        Formation spécialisée en développement d'applications et architecture logicielle
+                    </div>
+                </div>
+
+                <div class="education-card animate-on-scroll">
+                    <div class="education-year">2017</div>
+                    <div class="education-degree">Baccalauréat II</div>
+                    <div class="education-school">Protestant « Les Leaders »</div>
+                    <div class="education-details">
+                        Date d'obtention : Session juin 20175<br>
+                        Diplôme d'études secondaires
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="langues">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Langues</h2>
+            <div class="new-section-grid">
+                <div class="new-section-item animate-on-scroll">
+                    <div class="language-item">
+                        <span>🇫🇷</span>
+                        <p>Français</p>
+                    </div>
+                </div>
+                <div class="new-section-item animate-on-scroll">
+                    <div class="language-item">
+                        <span>🇬🇧</span>
+                        <p>Anglais</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="forces">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Forces</h2>
+            <div class="new-section-grid">
+                <div class="new-section-item animate-on-scroll">
+                    <div class="strength-item">Passionné</div>
+                </div>
+                <div class="new-section-item animate-on-scroll">
+                    <div class="strength-item">Motivé</div>
+                </div>
+                <div class="new-section-item animate-on-scroll">
+                    <div class="strength-item">Autonome</div>
+                </div>
+                <div class="new-section-item animate-on-scroll">
+                    <div class="strength-item">Curieux</div>
+                </div>
+                <div class="new-section-item animate-on-scroll">
+                    <div class="strength-item">Visionnaire</div>
+                </div>
+                <div class="new-section-item animate-on-scroll">
+                    <div class="strength-item">Persévérant</div>
+                </div>
+                <div class="new-section-item animate-on-scroll">
+                    <div class="strength-item">Rigoureux</div>
+                </div>
+                <div class="new-section-item animate-on-scroll">
+                    <div class="strength-item">Fiable</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Me Contacter</h2>
+            <div class="contact-info">
+                <div class="contact-item animate-on-scroll">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <p>kamalnadoh@gmail.com</p>
+                </div>
+                <div class="contact-item animate-on-scroll">
+                    <div class="contact-icon">📱</div>
+                    <h3>Téléphone</h3>
+                    <p>+228 96 25 25 50</p>
+                    <p>+228 91 66 40 40</p>
+                </div>
+                <div class="contact-item animate-on-scroll">
+                    <div class="contact-icon">🌍</div>
+                    <h3>Localisation</h3>
+                    <p>Agoè-Vakpossito, Lomé, Togo</p>
+                </div>
+                <div class="contact-item animate-on-scroll">
+                    <div class="contact-icon">💼</div>
+                    <h3>LinkedIn</h3>
+                    <p>
+                        <a href="https://www.linkedin.com/in/a-kamaroudine-nadoh-a49043204/" target="_blank">
+                            linkedin.com/in/a-kamaroudine-nadoh-a49043204
+                        </a>
+                    </p>
+                </div>
+
+            </div>
+
+            <form class="contact-form animate-on-scroll" onsubmit="sendMessage(event)">
+                <div class="form-group">
+                    <label for="name">Nom complet</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Sujet</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Envoyer le message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 A-Kamaroudine NADOH. Tous droits réservés.</p>
+            <p>Développé avec passion au Togo 🇹🇬</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Remove active class from all links
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
+                // Add active class to clicked link
+                this.classList.add('active');
+
+                // Smooth scroll to section
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Update active nav link on scroll
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+
+                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Project card interactions
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Contact form submission
+        function sendMessage(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+
+            // Create mailto link
+            const subject = encodeURIComponent(data.subject);
+            const body = encodeURIComponent(
+                `Nom: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`
+            );
+            const mailtoLink = `mailto:kamalnadoh@gmail.com?subject=${subject}&body=${body}`;
+
+            // Open email client
+            window.location.href = mailtoLink;
+
+            // Show success message
+            const btn = form.querySelector('.submit-btn');
+            const originalText = btn.textContent;
+            btn.textContent = 'Message envoyé! ✓';
+            btn.style.background = '#28a745';
+
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
+                form.reset();
+            }, 3000);
+        }
+
+        // Initialize animations
+        window.addEventListener('scroll', () => {
+            animateOnScroll();
+            updateActiveNavLink();
+        });
+
+        // Run animations on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            animateOnScroll();
+            updateActiveNavLink();
+        });
+
+        // Add typing effect for subtitle
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.textContent = '';
+
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+
+            type();
+        }
+
+        // Initialize typing effect
+        window.addEventListener('load', () => {
+            const subtitle = document.querySelector('.subtitle');
+            if (subtitle) {
+                const originalText = subtitle.textContent;
+                typeWriter(subtitle, originalText, 80);
+            }
+        });
+
+        // Add parallax effect to header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Add smooth reveal animations with stagger effect
+        function staggerAnimations() {
+            const skillCategories = document.querySelectorAll('.skill-category');
+            const projectCards = document.querySelectorAll('.project-card');
+            const educationCards = document.querySelectorAll('.education-card');
+            const newSectionItems = document.querySelectorAll('.new-section-item');
+
+            [skillCategories, projectCards, educationCards, newSectionItems].forEach(nodeList => {
+                nodeList.forEach((element, index) => {
+                    element.style.animationDelay = `${index * 0.1}s`;
+                });
+            });
+        }
+
+        // Initialize stagger animations
+        document.addEventListener('DOMContentLoaded', staggerAnimations);
+
+        // Add scroll progress indicator
+        function updateScrollProgress() {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollProgress = (scrollTop / scrollHeight) * 100;
+
+            // Create progress bar if it doesn't exist
+            let progressBar = document.querySelector('.scroll-progress');
+            if (!progressBar) {
+                progressBar = document.createElement('div');
+                progressBar.className = 'scroll-progress';
+                progressBar.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: ${scrollProgress}%;
+                    height: 3px;
+                    background: linear-gradient(135deg, #667eea, #764ba2);
+                    z-index: 9999;
+                    transition: width 0.1s ease;
+                `;
+                document.body.appendChild(progressBar);
+            } else {
+                progressBar.style.width = `${scrollProgress}%`;
+            }
+        }
+
+        // Add scroll progress to scroll event
+        window.addEventListener('scroll', () => {
+            animateOnScroll();
+            updateActiveNavLink();
+            updateScrollProgress();
+        });
+    </script>
+</body>
+
+</html>
