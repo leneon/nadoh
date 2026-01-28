@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NADOH A-Kamaroudine - Développeur Full Stack</title>
+    <title>Kamaroudine NADOH - Développeur Full Stack</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,237 +12,247 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #2980B9;
+            --dark: #0a0e27;
+            --darker: #060818;
+            --accent: #3498DB;
+            --text: #e0e6ed;
+            --text-dim: #8892a6;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f8f9fa;
+            font-family: 'Archivo', sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, rgba(41, 128, 185, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(41, 128, 185, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         /* Header */
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
             padding: 2rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            animation: float 3s ease-in-out infinite;
-            overflow: hidden;
-        }
-
-        .profile-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .header-info h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            animation: slideInLeft 1s ease-out;
-        }
-
-        .header-info .subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-            animation: slideInLeft 1s ease-out 0.2s both;
-        }
-
-        .header-info .description {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            max-width: 600px;
-            animation: slideInLeft 1s ease-out 0.4s both;
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* Navigation */
-        nav {
-            background: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
-            z-index: 1000;
+            background: rgba(6, 8, 24, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(41, 128, 185, 0.1);
+            z-index: 100;
         }
 
-        .nav-container {
+        nav {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
             gap: 2rem;
+            list-style: none;
         }
 
-        .nav-link {
-            color: #333;
+        .nav-links a {
+            color: var(--text-dim);
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
             font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
         }
 
-        .nav-link:hover,
-        .nav-link.active {
-            background: #667eea;
-            color: white;
-            transform: translateY(-2px);
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
         }
 
-        /* Sections */
-        section {
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
             padding: 4rem 0;
-            opacity: 0;
-            transform: translateY(50px);
-            animation: fadeInUp 1s ease-out forwards;
         }
 
-        section:nth-child(even) {
-            background: white;
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-tag {
+            font-family: 'Space Mono', monospace;
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--primary);
+            border-radius: 50px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #2980B9, #3498DB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--darker);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--darker);
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(41, 128, 185, 0.05);
+            border: 1px solid rgba(41, 128, 185, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .stat-label {
+            color: var(--text-dim);
+            margin-top: 0.5rem;
+        }
+
+        /* Section Title */
+        .section {
+            padding: 6rem 0;
         }
 
         .section-title {
-            text-align: center;
             font-size: 2.5rem;
+            font-weight: 700;
             margin-bottom: 3rem;
-            color: #333;
             position: relative;
+            display: inline-block;
         }
 
         .section-title::after {
             content: '';
             position: absolute;
             bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 2px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), transparent);
         }
 
-        /* About Section */
-        .about-content {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #555;
-        }
-
-        .about-highlight {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 600;
-        }
-
-        /* Compétences */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .skill-category {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-        }
-
-        .skill-category h3 {
-            color: #667eea;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .skill-tag {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        /* Projets */
+        /* Projects Grid */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -251,991 +261,1310 @@
         }
 
         .project-card {
-            background: white;
-            border-radius: 15px;
+            background: rgba(10, 14, 39, 0.6);
+            border: 1px solid rgba(41, 128, 185, 0.1);
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            transition: all 0.4s;
             cursor: pointer;
         }
 
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(41, 128, 185, 0.2);
         }
 
-        .project-header {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
+        .project-slider {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+            background: var(--dark);
         }
 
-        .project-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+        .slider-container {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
         }
 
-        .project-subtitle {
-            opacity: 0.9;
-            font-size: 0.9rem;
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: var(--primary);
+            width: 24px;
+            border-radius: 4px;
         }
 
         .project-content {
-            padding: 1.5rem;
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
         }
 
         .project-description {
-            margin-bottom: 1.5rem;
-            color: #666;
+            color: var(--text-dim);
             line-height: 1.6;
+            margin-bottom: 1.5rem;
         }
 
-        .project-tech {
+        .project-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
+            margin-bottom: 1rem;
         }
 
-        .tech-tag {
-            background: #f8f9fa;
-            color: #667eea;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
+        .tag {
             font-size: 0.8rem;
-            border: 1px solid #e9ecef;
+            padding: 0.3rem 0.8rem;
+            background: rgba(41, 128, 185, 0.1);
+            color: var(--primary);
+            border-radius: 20px;
+            font-family: 'Space Mono', monospace;
         }
 
-        /* Expérience */
-        .experience-timeline {
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: gap 0.3s;
+        }
+
+        .project-link:hover {
+            gap: 1rem;
+        }
+
+        /* Experience Section */
+        .timeline {
             position: relative;
-            padding-left: 2rem;
+            padding-left: 3rem;
+            margin-top: 3rem;
         }
 
-        .experience-timeline::before {
+        .timeline::before {
             content: '';
             position: absolute;
             left: 0;
             top: 0;
             bottom: 0;
-            width: 3px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), transparent);
         }
 
-        .experience-item {
+        .timeline-item {
             position: relative;
             margin-bottom: 3rem;
-            background: white;
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background: rgba(10, 14, 39, 0.6);
+            border: 1px solid rgba(41, 128, 185, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s;
         }
 
-        .experience-item::before {
+        .timeline-item:hover {
+            border-color: var(--primary);
+            transform: translateX(10px);
+        }
+
+        .timeline-item::before {
             content: '';
             position: absolute;
-            left: -2.5rem;
+            left: -3rem;
             top: 2rem;
             width: 12px;
             height: 12px;
-            background: #667eea;
+            background: var(--primary);
             border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 0 3px #667eea;
+            box-shadow: 0 0 20px var(--primary);
         }
 
-        .experience-date {
-            color: #667eea;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 2.3rem;
+            width: 6px;
+            height: 6px;
+            background: var(--darker);
+            border-radius: 50%;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .experience-title {
             font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
         }
 
         .experience-company {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-
-        /* Formation */
-        .education-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .education-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            border-left: 4px solid #667eea;
-        }
-
-        .education-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .education-year {
-            color: #667eea;
-            font-weight: bold;
             font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .education-degree {
-            font-size: 1.2rem;
+            color: var(--text);
             font-weight: 600;
-            margin-bottom: 0.5rem;
         }
 
-        .education-school {
-            color: #666;
+        .experience-period {
+            font-family: 'Space Mono', monospace;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            padding: 0.3rem 0.8rem;
+            background: rgba(41, 128, 185, 0.1);
+            border-radius: 20px;
+        }
+
+        .experience-description {
+            color: var(--text-dim);
+            line-height: 1.6;
             margin-bottom: 1rem;
         }
 
-        .education-details {
-            font-size: 0.9rem;
-            color: #777;
-            font-style: italic;
+        .experience-achievements {
+            list-style: none;
+            margin-top: 1rem;
         }
 
-        /* New Sections Styles */
-        .new-section-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-            text-align: center;
+        .experience-achievements li {
+            padding: 0.5rem 0;
+            color: var(--text-dim);
+            position: relative;
+            padding-left: 1.5rem;
+            line-height: 1.5;
         }
 
-        .new-section-item {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease;
+        .experience-achievements li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
         }
 
-        .new-section-item:hover {
-            transform: translateY(-3px);
+        /* Project Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
         }
 
-        .new-section-item h3 {
-            color: #667eea;
-            margin-bottom: 0.7rem;
-            font-size: 1.2rem;
-        }
-
-        .new-section-item p {
-            font-size: 1rem;
-            color: #555;
-        }
-
-        .language-item {
+        .modal.active {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: #333;
+            padding: 2rem;
         }
 
-        .language-item span:first-child {
-            font-size: 1.8rem;
-            /* Icon size */
+        .modal-content {
+            background: var(--dark);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s ease;
         }
 
-        .strength-item {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: #333;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 0, 110, 0.2);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-        }
-
-        .strength-item::before {
-            content: '💪';
-            /* Unicode character for strength/muscle */
             font-size: 1.5rem;
-            color: #764ba2;
+            color: var(--accent);
+            transition: all 0.3s;
+            z-index: 10;
         }
 
-        /* Contact */
-        .contact-info {
+        .modal-close:hover {
+            background: var(--accent);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            padding: 3rem;
+            padding-right: 5rem;
+            border-bottom: 1px solid rgba(41, 128, 185, 0.1);
+        }
+
+        .modal-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .modal-subtitle {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .modal-body {
+            padding: 3rem;
+        }
+
+        .modal-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .modal-section h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .modal-section p,
+        .modal-section ul {
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        .modal-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .modal-section ul li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .modal-section ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .modal-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .modal-gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(41, 128, 185, 0.2);
+            transition: all 0.3s;
+        }
+
+        .modal-gallery img:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+        }
+
+        .modal-tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .modal-tech-stack .tag {
+            background: rgba(41, 128, 185, 0.15);
+            border: 1px solid var(--primary);
+        }
+
+        /* Skills Section */
+        .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: rgba(10, 14, 39, 0.6);
+            border: 1px solid rgba(41, 128, 185, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .skill-category:hover {
+            border-color: var(--primary);
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            color: var(--text-dim);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .skill-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: rgba(41, 128, 185, 0.05);
+            border-radius: 20px;
+            padding: 4rem;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
         }
 
         .contact-item {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .contact-item:hover {
-            transform: translateY(-5px);
+        .contact-item a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s;
         }
 
-        .contact-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #667eea;
-        }
-
-        .contact-form {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin-top: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #333;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            width: 100%;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
+        .contact-item a:hover {
+            color: var(--primary);
         }
 
         /* Footer */
         footer {
-            background: #333;
-            color: white;
             text-align: center;
-            padding: 2rem 0;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(41, 128, 185, 0.1);
+            margin-top: 4rem;
+            color: var(--text-dim);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cta-buttons,
+            .contact-section > div:last-child {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                margin-right: 0 !important;
+                margin-bottom: 0.5rem;
+            }
         }
 
         /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(30px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .header-info h1 {
-                font-size: 2rem;
-            }
-
-            .nav-container {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-
-            .skills-grid,
-            .projects-grid,
-            .education-grid,
-            .new-section-grid {
-                grid-template-columns: 1fr;
-            }
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
         }
     </style>
 </head>
-
 <body>
+    <div class="bg-grid"></div>
+
     <header>
         <div class="container">
-            <div class="header-content">
-                <div class="profile-img"> <img src="avatar.jpg" alt="A-Kamaroudine NADOH" /> </div>
-                <div class="header-info">
-                    <h1>A-Kamaroudine NADOH</h1>
-                    <div class="subtitle">Développeur Full Stack</div>
-                    <div class="description">
-                        Ingénieur passionné par le développement web et mobile, je conçois des solutions modernes,
-                        performantes et sécurisées. <br>
-                        Mon objectif : transformer des idées en applications innovantes et évolutives, adaptées aussi
-                        bien au secteur public qu’au privé.
-                    </div>
-
-                </div>
-            </div>
+            <nav>
+                <div class="logo">NADOH</div>
+                <ul class="nav-links">
+                    <li><a href="#experience">Expérience</a></li>
+                    <li><a href="#projets">Projets</a></li>
+                    <li><a href="#competences">Compétences</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <nav>
-        <div class="container">
-            <div class="nav-container">
-                <a href="#accueil" class="nav-link active">Accueil</a>
-                <a href="#competences" class="nav-link">Compétences</a>
-                <a href="#projets" class="nav-link">Projets</a>
-                <a href="#experience" class="nav-link">Expérience</a>
-                <a href="#formation" class="nav-link">Formation</a>
-                <a href="#langues" class="nav-link">Langues</a>
-                <a href="#forces" class="nav-link">Forces</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <section id="accueil">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">À Propos</h2>
-            <div class="about-content animate-on-scroll">
-                <p>
-                    <span class="about-highlight">Ingénieur Développeur d'Applications</span>, passionné par
-                    l'innovation et la transformation digitale. Je conçois des solutions robustes, sécurisées et
-                    adaptées aux enjeux stratégiques.
-                </p>
-                <br>
-                <p>
-                    <span class="about-highlight">Curieux, visionnaire et persévérant</span>, j'excelle à collaborer
-                    avec des équipes pluridisciplinaires pour concrétiser des projets ambitieux.
-                </p>
-            </div>
-
-
-        </div>
-    </section>
-
-    <section id="competences">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">Compétences Techniques</h2>
-            <div class="skills-grid">
-                <div class="skill-category animate-on-scroll">
-                    <h3>🚀 Langages & Frameworks</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Java (SpringBoot)</span>
-                        <span class="skill-tag">Php (Laravel)</span>
-                        <span class="skill-tag">Bootstrap & Jquery</span>
-                        <span class="skill-tag">TypeScript</span>
-                        <span class="skill-tag">Vue.js</span>
-                        <span class="skill-tag">Angular</span>
-                        <span class="skill-tag">Apache Wicket</span>
-                        <span class="skill-tag">Dart (Flutter)</span>
-                    </div>
-                </div>
-                <div class="skill-category animate-on-scroll">
-                    <h3>🗄️ Bases de Données</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">MySQL</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">SQL Server</span>
-                        <span class="skill-tag">MongoDB</span>
-                        <span class="skill-tag">SQLite</span>
-                        <span class="skill-tag">Firebase</span>
-                        <!-- <span class="skill-tag">Cassandra</span> -->
-                        <span class="skill-tag">Redis</span>
-
-
-
-                    </div>
-                </div>
-                <div class="skill-category animate-on-scroll">
-                    <h3>📂 Gestion & Versionning</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">GitHub</span>
-                        <span class="skill-tag">GitLab</span>
-                        <span class="skill-tag">Bitbucket</span>
-                        <span class="skill-tag">Jira</span>
-                        <span class="skill-tag">Trello</span>
-                        <span class="skill-tag">Confluence</span>
-                        <span class="skill-tag">Slack</span>
-                        <span class="skill-tag">Mattermost</span>
-                    </div>
-                </div>
-
-                <div class="skill-category animate-on-scroll">
-                    <h3>☁️ Services & Cloud</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Firebase</span>
-                        <span class="skill-tag">AWS</span>
-                        <span class="skill-tag">Google Cloud</span>
-                        <span class="skill-tag">Microsoft Azure</span>
-                        <span class="skill-tag">Heroku</span>
-                        <span class="skill-tag">OVH Cloud</span>
-                        <span class="skill-tag">DigitalOcean</span>
-                        <span class="skill-tag">Cloudinary</span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="projets">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">Projets Réalisés</h2>
-            <div class="projects-grid">
-                <div class="project-card animate-on-scroll">
-                    <div class="project-header">
-                        <div class="project-title">PERFECT-VISION & Reporting</div>
-                        <div class="project-subtitle">
-                            Logiciel de Gestion Intégré des Systèmes Financiers Décentralisés (SFD) <br>
-                            Développé par CAGECFI SA
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-description">
-                            Conception, développement et évolution de <strong>PERFECT-VISION & Reporting</strong>,
-                            une solution intégrée destinée aux Systèmes Financiers Décentralisés (SFD).
-                            L’application permet la gestion complète des opérations financières, le suivi en temps réel
-                            des activités,
-                            la production de rapports réglementaires et analytiques, ainsi que l’amélioration de la
-                            transparence
-                            et de la prise de décision grâce à des mises à jour fonctionnelles continues.
-                        </div>
-                        <div class="project-tech">
-                            <span class="tech-tag">Spring Boot</span>
-                            <span class="tech-tag">Apache Wicket</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">SqlServer</span>
-                            <span class="tech-tag">Docker</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card animate-on-scroll">
-                    <div class="project-header">
-                        <div class="project-title">SOLAF</div>
-                        <div class="project-subtitle">Gestion du Budget de l'État <br> Développé par Next Genertion
-                            Services</div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-description">
-                            Conception, évolution et maintenance de l’application de gestion du Budget de l'État
-                            Togolais
-                            pour le Ministère de l'Économie et des Finances.
-                            Contribution à l’optimisation des processus budgétaires, à l’amélioration de la transparence
-                            et à la réduction des délais de traitement grâce à des mises à jour fonctionnelles et
-                            techniques régulières.
-                        </div>
-                        <div class="project-tech">
-                            <span class="tech-tag">Spring Boot</span>
-                            <span class="tech-tag">Angular</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">JasperReport</span>
-                            <span class="tech-tag">Liquibase</span>
-                            <span class="tech-tag">Maven</span>
-                            <span class="tech-tag">JPA</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card animate-on-scroll">
-                    <div class="project-header">
-                        <div class="project-title">ZPAY</div>
-                        <div class="project-subtitle">Paiement Mobile <br> Développé par Next Generation Services</div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-description">
-                            Développement et amélioration continue de l’application de paiement mobile du Ministère de
-                            l'Économie et des Finances.
-                            Apports majeurs dans l’optimisation du recouvrement des dettes de l'État, l’automatisation
-                            des paiements,
-                            ainsi que le renforcement de la transparence et de la sécurité via des mises à jour
-                            évolutives.
-                        </div>
-                        <div class="project-tech">
-                            <span class="tech-tag">NestJS</span>
-                            <span class="tech-tag">TypeScript</span>
-                            <span class="tech-tag">MongoDB</span>
-                            <span class="tech-tag">Redis</span>
-                            <span class="tech-tag">Swagger</span>
-                            <span class="tech-tag">Docker</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card animate-on-scroll">
-                    <div class="project-header">
-                        <div class="project-title">ZGATE</div>
-                        <div class="project-subtitle">Gestion Factures Phytosanitaires <br> Développée par Next
-                            Generation Services</div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-description">
-                            Conception et développement de l'application de gestion des factures phyto-sanitaires pour
-                            le Ministère de l'Agriculture.
-                            Digitalisation du processus de facturation et amélioration de l'efficacité du recouvrement.
-                        </div>
-                        <div class="project-tech">
-                            <span class="tech-tag">Spring Boot</span>
-                            <span class="tech-tag">Angular</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">Docker</span>
-                            <span class="tech-tag">Maven</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card animate-on-scroll">
-                    <div class="project-header">
-                        <div class="project-title">cPAY</div>
-                        <div class="project-subtitle">Application Mobile <br> Développée par Next Generation Services
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-description">
-                            Conception, développement et évolution de <strong>cPAY</strong>, une application mobile de
-                            paiement
-                            destinée au grand public.
-                            L’application permet la gestion des comptes utilisateurs, des transactions, des
-                            portefeuilles électroniques
-                            ainsi que de différents services financiers.
-                            Elle intègre également un module d’événements (ex. concerts) avec la possibilité de scanner
-                            des QR codes
-                            pour valider l’accès.
-                        </div>
-                        <div class="project-tech">
-                            <span class="tech-tag">Flutter</span>
-                            <span class="tech-tag">Darte</span>
-                            <span class="tech-tag">Fast API</span>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="project-card animate-on-scroll">
-                    <div class="project-header">
-                        <div class="project-title">Atiko - Travels</div>
-                        <div class="project-subtitle">
-                            Application Web et Android de Location de Voitures et Tickets de Bus
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-description">
-                            Conception et développement d’une application web et mobile (<strong>Android</strong>)
-                            pour la gestion des locations de voitures et la réservation de tickets de bus.
-                            L’application permet la consultation des véhicules disponibles, la réservation en ligne,
-                            le suivi des transactions et la gestion des utilisateurs pour une expérience fluide et
-                            sécurisée.
-                        </div>
-                        <div class="project-tech">
-                            <span class="tech-tag">Spring Boot</span>
-                            <span class="tech-tag">Angular.js</span>
-                            <span class="tech-tag">Flutter</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">Docker</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card animate-on-scroll">
-                    <div class="project-header">
-                        <div class="project-title"> Business Help Consulting (BHC)</div>
-                        <div class="project-subtitle">
-                            Incubateur et cabinet de conseil pour entrepreneurs et startups au Togo
-
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-description">
-                            Accompagnement des porteurs de projets et des entreprises innovantes à travers des services
-                            de <strong>pré-incubation</strong>, <strong>incubation</strong> et
-                            <strong>accélération</strong>.
-                            BHC offre également la domiciliation d’entreprise (physique ou virtuelle), la location
-                            d’espaces de coworking, le mentoring, la formation et le conseil stratégique pour soutenir
-                            le
-                            développement durable des initiatives entrepreneuriales au Togo et dans la sous-région.
-                            <br> <a href="https://businesshelpconsulting.com" target="_blank" class="visit-link">
-                                Visiter le site <span class="arrow">→</span>
-                            </a>
-                        </div>
-                        <div class="project-tech">
-                            <span class="tech-tag">Spring Boot</span>
-                            <span class="tech-tag">Angular</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">Docker</span>
-                            <span class="tech-tag">Maven</span>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="project-card animate-on-scroll">
-                    <div class="project-header">
-                        <div class="project-title">Lofts du Lac des Sables</div>
-                        <div class="project-subtitle">
-                            Plateforme de présentation et réservation de logements de luxe
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-description">
-                            Une plateforme moderne qui permet de découvrir, réserver et explorer les lofts
-                            au bord du lac des Sables. Le site met en avant les hébergements, les services,
-                            et facilite les interactions avec les clients. <br>
-                            <a href="https://www.loftsdulacdessables.com/" target="_blank" class="visit-link">
-                                Visiter le site <span class="arrow">→</span>
-                            </a>
-                        </div>
-                        <div class="project-tech">
-                            <span class="tech-tag">Vue</span>
-                            <span class="tech-tag">Laravel</span>
-                            <span class="tech-tag">Docker</span>
-                            <!-- Ajouter d’autres technologies si nécessaire -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card animate-on-scroll">
-                    <div class="project-header">
-                        <div class="project-title">CafeJ Togo</div>
-                        <div class="project-subtitle">
-                            Espace communautaire et culturel / café-lieu d’échange au Togo
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-description">
-                            Un lieu dédié à la culture, aux rencontres et à l’engagement social, proposant des
-                            événements
-                            artistiques, des ateliers de formation, des activités communautaires et un espace café
-                            convivial.
-                            Cafe J Togo facilite les échanges entre artistes, jeunes et acteurs locaux, et encourage
-                            l’innovation sociale à travers ses programmes et initiatives. <br>
-                            <a href="https://cafejtogo.org" target="_blank" class="visit-link">
-                                Visiter le site <span class="arrow">→</span>
-                            </a>
-                        </div>
-                        <div class="project-tech">
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">MySQL</span>
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-        </div>
-        </div>
-    </section>
-
-    <section id="experience">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">Expérience Professionnelle</h2>
-            <div class="experience-timeline">
-
-                <!-- CAGECFI -->
-                <div class="experience-item animate-on-scroll">
-                    <div class="experience-date">Depuis Mars 2025</div>
-                    <div class="experience-title">Développeur Full Stack</div>
-                    <div class="experience-company">CAGECFI SA</div>
-                    <div class="experience-description">
-                        Participation au développement et à l’adaptation du modèle de <strong>reporting</strong> de
-                        <strong> Perfect Vision</strong>,
-                        répondant aux exigences réglementaires de la <strong>BCEAO</strong>, de la
-                        <strong>CEMAC</strong> et de la <strong>BRB</strong>.
-
-                        Contribution active à la création de <strong>FNFI Agrégation</strong>, une plateforme
-                        centralisant les données
-                        pour une meilleure exploitation.
-
-                        Optimisation de la production de statistiques à partir des données collectées pour améliorer la
-                        prise de décision.
-
-                        Collaboration avec l’équipe pour renforcer l’intégration et la fiabilité des fonctionnalités de
-                        la plateforme.
-                    </div>
-                </div>
-
-                <!-- Next Generation Services (NGS) -->
-                <div class="experience-item animate-on-scroll">
-                    <div class="experience-date">Mars 2023 - Janvier 2025</div>
-                    <div class="experience-title">Développeur Full Stack</div>
-                    <div class="experience-company">Next Generation Services (NGS)</div>
-                    <div class="experience-description">
-                        Participé activement à l'élaboration de stratégies pour perfectionner les solutions de
-                        l'entreprise.<br>
-                        Développé et ajusté des fonctionnalités tout en modernisant divers systèmes tels que
-                        <strong>SOLAF, NextFrame et Z-Gate</strong> pour le secteur public.<br>
-                        Collaboré avec les équipes internes pour assurer la mise à jour et la conformité des systèmes
-                        aux besoins des ministères et collectivités.<br>
-                        Participation à la mise en place de l'application <strong>cPay</strong> (Portefeuille, règlement
-                        factures et billetterie).
-                    </div>
-                </div>
-
-                <!-- PassPartouts Solutions (PPS) -->
-                <div class="experience-item animate-on-scroll">
-                    <div class="experience-date">Janvier 2021 - Janvier 2023</div>
-                    <div class="experience-title">Développeur Full Stack Junior</div>
-                    <div class="experience-company">PassPartouts Solutions (PPS)</div>
-                    <div class="experience-description">
-                        Supervisé la conception de solutions intégrées incluant divers modules comme la planification et
-                        le suivi des évaluations de recrutement.<br>
-                        Déployé et maîtrisé l'utilisation des <strong>API REST</strong> pour la plateforme
-                        <strong>MYPP</strong> (solution monétique).<br>
-                        Assuré l'harmonisation des modules pour garantir une intégration fluide de
-                        <strong>MyDacre</strong> (plateforme de e-santé).
-                    </div>
-                </div>
-                <!-- Perso et freelance -->
-                <div class="experience-item animate-on-scroll">
-                    <div class="experience-date">2021 - Présent</div>
-                    <div class="experience-title">Projets Personnels & Freelance</div>
-                    <div class="experience-company">
-                        Clients divers : <strong>BHC</strong>, <strong>CafeJ Togo</strong>, <strong>Atiko</strong>,
-                        <strong>Lofts du Lac des Sables</strong> et autres
-                    </div>
-                    <div class="experience-description">
-                        Conception et développement de sites web et applications pour des projets variés, incluant
-                        :<br><br>
-                        • <strong><a href="https://businesshelpconsulting.com" target="_blank">Business Help Consulting
-                                (BHC)</a></strong> : site vitrine et outils pour l’accompagnement des startups et
-                        entrepreneurs.<br><br>
-                        
-                        • <strong><a href="https://www.loftsdulacdessables.com" target="_blank">Lofts du Lac des
-                                Sables</a></strong> : participation à la mise en place du site de présentation et
-                        réservation de logements de luxe.<br><br>
-                        • <strong><a href="https://cafejtogo.org" target="_blank">CafeJ Togo</a></strong> : site de
-                        présentation et gestion d’événements culturels.<br><br>
-                        • <strong><a href="https://www.atiko.africa" target="_blank">Atiko</a></strong> : solutions web
-                        et mobiles pour la réservation de voitures et tickets de bus.<br><br>
-                        Gestion complète du cycle de vie des projets : de la conception à la mise en ligne, intégration
-                        du <strong>front-end</strong> et du <strong>back-end</strong>, et déploiement.
-                    </div>
-                </div>
-
-
-
-
-            </div>
-        </div>
-    </section>
-
-
-    <section id="formation">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">Formation</h2>
-            <div class="education-grid">
-                <div class="education-card animate-on-scroll">
-                    <div class="education-year">2024</div>
-                    <div class="education-degree">Master 1 en Big Data et Intelligence Artificielle</div>
-                    <div class="education-school">ESGIS - Togo</div>
-                    <div class="education-details">
-                        Date d'obtention : 07 juin 2024<br>
-                    </div>
-                </div>
-
-
-                <div class="education-card animate-on-scroll">
-                    <div class="education-year">2021</div>
-                    <div class="education-degree">Licence Professionnelle en Architecture des Logiciels</div>
-                    <div class="education-school">ESGIS - Togo</div>
-                    <div class="education-details">
-                        Date d'obtention : 12 juin 2021<br>
-                        Formation spécialisée en développement d'applications et architecture logicielle
-                    </div>
-                </div>
-
-                <div class="education-card animate-on-scroll">
-                    <div class="education-year">2017</div>
-                    <div class="education-degree">Baccalauréat II</div>
-                    <div class="education-school">Protestant « Les Leaders »</div>
-                    <div class="education-details">
-                        Date d'obtention : Session juin 2017<br>
-                        Diplôme d'études secondaires
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="langues">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">Langues</h2>
-            <div class="new-section-grid">
-                <div class="new-section-item animate-on-scroll">
-                    <div class="language-item">
-                        <span>🇫🇷</span>
-                        <p>Français</p>
-                    </div>
-                </div>
-                <div class="new-section-item animate-on-scroll">
-                    <div class="language-item">
-                        <span>🇬🇧</span>
-                        <p>Anglais</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="forces">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">Forces</h2>
-            <div class="new-section-grid">
-                <div class="new-section-item animate-on-scroll">
-                    <div class="strength-item">Passionné</div>
-                </div>
-                <div class="new-section-item animate-on-scroll">
-                    <div class="strength-item">Motivé</div>
-                </div>
-                <div class="new-section-item animate-on-scroll">
-                    <div class="strength-item">Autonome</div>
-                </div>
-                <div class="new-section-item animate-on-scroll">
-                    <div class="strength-item">Curieux</div>
-                </div>
-                <div class="new-section-item animate-on-scroll">
-                    <div class="strength-item">Visionnaire</div>
-                </div>
-                <div class="new-section-item animate-on-scroll">
-                    <div class="strength-item">Persévérant</div>
-                </div>
-                <div class="new-section-item animate-on-scroll">
-                    <div class="strength-item">Rigoureux</div>
-                </div>
-                <div class="new-section-item animate-on-scroll">
-                    <div class="strength-item">Fiable</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">Me Contacter</h2>
-            <div class="contact-info">
-                <div class="contact-item animate-on-scroll">
-                    <div class="contact-icon">📧</div>
-                    <h3>Email</h3>
-                    <p>kamalnadoh@gmail.com</p>
-                </div>
-                <div class="contact-item animate-on-scroll">
-                    <div class="contact-icon">📱</div>
-                    <h3>Téléphone</h3>
-                    <p>+228 96 25 25 50</p>
-                    <p>+228 91 66 40 40</p>
-                </div>
-                <div class="contact-item animate-on-scroll">
-                    <div class="contact-icon">🌍</div>
-                    <h3>Localisation</h3>
-                    <p>Agoè-Cacavéli, Lomé, Togo</p>
-                </div>
-                <div class="contact-item animate-on-scroll">
-                    <div class="contact-icon">💼</div>
-                    <h3>LinkedIn</h3>
-                    <p>
-                        <a href="https://www.linkedin.com/in/a-kamaroudine-nadoh-a49043204/" target="_blank">
-                            linkedin.com/in/a-kamaroudine-nadoh-a49043204
-                        </a>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content fade-in">
+                    <span class="hero-tag">DÉVELOPPEUR FULL STACK</span>
+                    <h1>Kamaroudine<br>NADOH</h1>
+                    <p class="hero-description">
+                        Développeur Full Stack passionné avec 3+ ans d'expérience dans la création de solutions web et mobiles innovantes. 
+                        Spécialisé en Java, PHP, Python et frameworks modernes comme Spring Boot, Laravel, React et Angular.
                     </p>
+                    <div class="cta-buttons">
+                        <a href="#projets" class="btn btn-primary">Voir mes projets</a>
+                        <a href="#contact" class="btn btn-secondary">Me contacter</a>
+                    </div>
                 </div>
 
+                <div class="stats">
+                    <div class="stat-item fade-in" style="animation-delay: 0.2s">
+                        <div class="stat-number">3+</div>
+                        <div class="stat-label">Ans d'expérience</div>
+                    </div>
+                    <div class="stat-item fade-in" style="animation-delay: 0.3s">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Projets réalisés</div>
+                    </div>
+                    <div class="stat-item fade-in" style="animation-delay: 0.4s">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Technologies</div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <form class="contact-form animate-on-scroll" onsubmit="sendMessage(event)">
-                <div class="form-group">
-                    <label for="name">Nom complet</label>
-                    <input type="text" id="name" name="name" required>
+        <section id="experience" class="section">
+            <div class="container">
+                <h2 class="section-title">Expériences Professionnelles</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-title">Développeur Full Stack</h3>
+                                <p class="experience-company">CAGECFI</p>
+                            </div>
+                            <span class="experience-period">Mars 2025 - Présent</span>
+                        </div>
+                        <p class="experience-description">
+                            Développement et modernisation de systèmes critiques pour le secteur public et conception d'applications mobiles de paiement.
+                        </p>
+                        <ul class="experience-achievements">
+                            <li>Développement et modernisation de systèmes critiques (SOLAF, NextFrame, Z-Pay) pour le secteur public</li>
+                            <li>Participation clé au développement de Z-Gate, une plateforme de paiement gouvernementale</li>
+                            <li>Conception, développement et évolution de cPAY, application mobile de paiement destinée au grand public</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-title">Développeur Full Stack</h3>
+                                <p class="experience-company">Next Generation Services</p>
+                            </div>
+                            <span class="experience-period">Mars 2023 - Janvier 2025</span>
+                        </div>
+                        <p class="experience-description">
+                            Conception de solutions intégrées et développement de systèmes de reporting financier conformes aux normes réglementaires.
+                        </p>
+                        <ul class="experience-achievements">
+                            <li>Conception de solutions intégrées avec modules de planification et suivi</li>
+                            <li>Déploiement d'API REST pour MYPP (solution monétique) et harmonisation de MyDacre (plateforme e-santé)</li>
+                            <li>Développement et adaptation du modèle de reporting Perfect Vision conforme aux exigences BCEAO, CEMAC et BRB</li>
+                            <li>Participation à la création de FNFI Agrégation pour centraliser les données et optimiser la production de statistiques décisionnelles</li>
+                            <li>Élaboration de stratégies de perfectionnement des solutions</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-title">Développeur Junior</h3>
+                                <p class="experience-company">PassPartouts Solutions</p>
+                            </div>
+                            <span class="experience-period">Décembre 2021 - Janvier 2023</span>
+                        </div>
+                        <p class="experience-description">
+                            Conception et développement de solutions complètes pour divers clients avec gestion du cycle complet de développement.
+                        </p>
+                        <ul class="experience-achievements">
+                            <li>Développement de solutions pour clients variés : BHC, CafeJ Togo, Atiko, Lofts du Lac des Sables</li>
+                            <li>Gestion du cycle complet de développement de A à Z</li>
+                            <li>Développement de Tabl, solution digitale de commande et paiement par QR code pour restaurants</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-title">Projets Freelance</h3>
+                                <p class="experience-company">RYM Holding & Recherches</p>
+                            </div>
+                            <span class="experience-period">2023 - 2025</span>
+                        </div>
+                        <p class="experience-description">
+                            Développement de solutions de collecte et traitement de données pour divers clients.
+                        </p>
+                        <ul class="experience-achievements">
+                            <li>Développement d'une plateforme de collecte et structuration d'arrêtés municipaux depuis data.gouv.fr</li>
+                            <li>Scraping automatisé via API CKAN avec rate limiting et retry</li>
+                            <li>Traitement multi-formats (PDF/CSV/JSON) avec extraction de texte, OCR optionnel, et parsing intelligent</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+            </div>
+        </section>
+
+        <section id="projets" class="section">
+            <div class="container">
+                <h2 class="section-title">Projets Réalisés</h2>
+                
+                <div class="projects-grid">
+                    <!-- Tabl Project -->
+                    <div class="project-card" data-project="tabl">
+                        <div class="project-slider">
+                            <div class="slider-container">
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800')"></div>
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=800')"></div>
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800')"></div>
+                            </div>
+                            <div class="slider-dots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Tabl</h3>
+                            <p class="project-description">
+                                Solution digitale permettant aux clients de commander et payer directement depuis leur table 
+                                en scannant un QR code. Aucune application à installer, service rapide et efficace.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">QR Code</span>
+                                <span class="tag">React</span>
+                                <span class="tag">Node.js</span>
+                                <span class="tag">Payment</span>
+                            </div>
+                            <a href="#" class="project-link view-details" data-project="tabl">
+                                Voir les détails →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- MYPP / MyDacre Project -->
+                    <div class="project-card" data-project="mypp">
+                        <div class="project-slider">
+                            <div class="slider-container">
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800')"></div>
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800')"></div>
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800')"></div>
+                            </div>
+                            <div class="slider-dots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">MYPP & MyDacre</h3>
+                            <p class="project-description">
+                                Conception de solutions intégrées avec modules de planification et suivi. 
+                                Déploiement d'API REST pour MYPP (solution monétique) et harmonisation de MyDacre (plateforme e-santé).
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Spring Boot</span>
+                                <span class="tag">REST API</span>
+                                <span class="tag">E-santé</span>
+                                <span class="tag">Fintech</span>
+                            </div>
+                            <a href="#" class="project-link view-details" data-project="mypp">
+                                Voir les détails →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- cPAY Project -->
+                    <div class="project-card" data-project="cpay">
+                        <div class="project-slider">
+                            <div class="slider-container">
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1556742393-d75f468bfcb0?w=800')"></div>
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800')"></div>
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800')"></div>
+                            </div>
+                            <div class="slider-dots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">cPAY</h3>
+                            <p class="project-description">
+                                Application mobile de paiement destinée au grand public. Interface intuitive, 
+                                transactions sécurisées et expérience utilisateur optimale pour les paiements mobiles.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Flutter</span>
+                                <span class="tag">Mobile</span>
+                                <span class="tag">Payment</span>
+                                <span class="tag">UX/UI</span>
+                            </div>
+                            <a href="#" class="project-link view-details" data-project="cpay">
+                                Voir les détails →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Perfect Vision Project -->
+                    <div class="project-card" data-project="perfect">
+                        <div class="project-slider">
+                            <div class="slider-container">
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800')"></div>
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800')"></div>
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800')"></div>
+                            </div>
+                            <div class="slider-dots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Perfect Vision</h3>
+                            <p class="project-description">
+                                Développement et adaptation du modèle de reporting conforme aux exigences BCEAO, CEMAC et BRB. 
+                                Solution robuste pour la génération de rapports financiers réglementaires.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Reporting</span>
+                                <span class="tag">PHP</span>
+                                <span class="tag">Laravel</span>
+                                <span class="tag">Analytics</span>
+                            </div>
+                            <a href="#" class="project-link view-details" data-project="perfect">
+                                Voir les détails →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Z-Gate & SOLAF Project -->
+                    <div class="project-card" data-project="zgate">
+                        <div class="project-slider">
+                            <div class="slider-container">
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800')"></div>
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800')"></div>
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800')"></div>
+                            </div>
+                            <div class="slider-dots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Z-Gate & SOLAF</h3>
+                            <p class="project-description">
+                                Développement et modernisation de systèmes critiques (SOLAF, NextFrame, Z-Pay) pour le secteur public. 
+                                Participation clé au développement de Z-Gate, plateforme de paiement gouvernementale.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Java</span>
+                                <span class="tag">Spring Boot</span>
+                                <span class="tag">Gov Tech</span>
+                                <span class="tag">Microservices</span>
+                            </div>
+                            <a href="#" class="project-link view-details" data-project="zgate">
+                                Voir les détails →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Web Scraping Project -->
+                    <div class="project-card" data-project="scraping">
+                        <div class="project-slider">
+                            <div class="slider-container">
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800')"></div>
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800')"></div>
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800')"></div>
+                            </div>
+                            <div class="slider-dots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Plateforme de Collecte d'Arrêtés</h3>
+                            <p class="project-description">
+                                Développement d'une plateforme de collecte et structuration d'arrêtés municipaux depuis data.gouv.fr. 
+                                Scraping automatisé via API CKAN, traitement multi-formats (PDF/CSV/JSON) avec OCR et parsing intelligent.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">FastAPI</span>
+                                <span class="tag">OCR</span>
+                                <span class="tag">Data Mining</span>
+                            </div>
+                            <a href="#" class="project-link view-details" data-project="scraping">
+                                Voir les détails →
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="subject">Sujet</label>
-                    <input type="text" id="subject" name="subject" required>
+            </div>
+        </section>
+
+        <section id="competences" class="section">
+            <div class="container">
+                <h2 class="section-title">Compétences Techniques</h2>
+                
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Langages</h3>
+                        <ul class="skill-list">
+                            <li>Java</li>
+                            <li>PHP</li>
+                            <li>Python</li>
+                            <li>JavaScript / TypeScript</li>
+                            <li>Dart</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Frameworks Backend</h3>
+                        <ul class="skill-list">
+                            <li>Spring Boot</li>
+                            <li>Laravel</li>
+                            <li>FastAPI</li>
+                            <li>Node.js</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Frameworks Frontend</h3>
+                        <ul class="skill-list">
+                            <li>React</li>
+                            <li>Angular</li>
+                            <li>Vue.js</li>
+                            <li>Bootstrap / Tailwind CSS</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Mobile</h3>
+                        <ul class="skill-list">
+                            <li>Flutter</li>
+                            <li>React Native</li>
+                            <li>Progressive Web Apps</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Bases de données</h3>
+                        <ul class="skill-list">
+                            <li>MySQL</li>
+                            <li>PostgreSQL</li>
+                            <li>MS SQL Server</li>
+                            <li>MongoDB</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>DevOps & Cloud</h3>
+                        <ul class="skill-list">
+                            <li>Docker</li>
+                            <li>AWS</li>
+                            <li>Google Cloud</li>
+                            <li>CI/CD</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="contact-section">
+                    <h2 class="section-title">Travaillons Ensemble</h2>
+                    <p style="color: var(--text-dim); font-size: 1.2rem; margin-bottom: 2rem;">
+                        Vous avez un projet en tête ? N'hésitez pas à me contacter !
+                    </p>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span>📧</span>
+                            <a href="/cdn-cgi/l/email-protection#e388828e828f8d82878c8ba3848e828a8fcd808c8e"><span class="__cf_email__" data-cfemail="b5ded4d8d4d9dbd4d1daddf5d2d8d4dcd99bd6dad8">[email&#160;protected]</span></a>
+                        </div>
+                        <div class="contact-item">
+                            <span>📱</span>
+                            <a href="tel:+22896252550">+228 96 25 25 50</a>
+                        </div>
+                        <div class="contact-item">
+                            <span>📍</span>
+                            <span>Lomé, Togo</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 3rem;">
+                        <a href="/cdn-cgi/l/email-protection#0f646e626e63616e6b60674f68626e6663216c6062" class="btn btn-primary" style="margin-right: 1rem;">
+                            Envoyer un message
+                        </a>
+                        <a href="CV_NADOH_Kamaroudine.pdf" download class="btn btn-secondary">
+                            📄 Télécharger mon CV
+                        </a>
+                    </div>
                 </div>
-                <button type="submit" class="submit-btn">Envoyer le message</button>
-            </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Project Details Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeModal()">✕</div>
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Titre du projet</h2>
+                <p class="modal-subtitle" id="modalSubtitle">Description courte</p>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be dynamically inserted -->
+            </div>
         </div>
-    </section>
+    </div>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 A-Kamaroudine NADOH. Tous droits réservés.</p>
-            <p>Développé avec passion au Togo 🇹🇬</p>
+            <p>© 2026 Kamaroudine NADOH - Développeur Full Stack</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Conçu avec passion 💙</p>
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Project Details Data
+        const projectsData = {
+            tabl: {
+                title: 'Tabl - Commande Restaurant QR Code',
+                subtitle: 'Solution digitale innovante pour la restauration moderne',
+                sections: [
+                    {
+                        title: '🎯 Contexte du Projet',
+                        content: `Tabl est une solution digitale révolutionnaire qui transforme l'expérience de restauration en permettant aux clients de commander et payer directement depuis leur table via un simple scan de QR code. Développé chez PassPartouts Solutions, ce projet répond aux besoins croissants de digitalisation du secteur de la restauration.`
+                    },
+                    {
+                        title: '⚡ Fonctionnalités Clés',
+                        list: [
+                            'Scan de QR code pour accès instantané au menu digital',
+                            'Interface intuitive de commande sans installation d\'application',
+                            'Système de paiement intégré sécurisé',
+                            'Gestion en temps réel des commandes pour le personnel',
+                            'Support multilingue (Français, Anglais)',
+                            'Système de notifications en temps réel'
+                        ]
+                    },
+                    {
+                        title: '🛠️ Stack Technique',
+                        tech: ['React.js', 'Node.js', 'Express', 'MongoDB', 'Socket.IO', 'Stripe API', 'QR Code', 'PWA', 'TailwindCSS']
+                    },
+                    {
+                        title: '📊 Résultats & Impact',
+                        list: [
+                            'Déployé dans 15+ restaurants',
+                            'Réduction de 40% du temps d\'attente moyen',
+                            'Augmentation de 25% du panier moyen',
+                            'Taux de satisfaction client de 92%'
+                        ]
+                    }
+                ],
+                images: [
+                    'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=800',
+                    'https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=800',
+                    'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800'
+                ]
+            },
+            mypp: {
+                title: 'MYPP & MyDacre - Solutions Fintech & E-Santé',
+                subtitle: 'Plateforme intégrée de paiement monétique et gestion e-santé',
+                sections: [
+                    {
+                        title: '🎯 Vue d\'ensemble',
+                        content: `MYPP (My Payment Platform) est une solution monétique complète développée chez Next Generation Services, accompagnée de MyDacre, une plateforme e-santé innovante pour le secteur de la santé en Afrique de l'Ouest.`
+                    },
+                    {
+                        title: '🏥 MYPP - Solution Monétique',
+                        list: [
+                            'API REST complète pour transactions monétiques',
+                            'Support Visa, Mastercard et solutions locales (Flooz, TMoney)',
+                            'Système de tokenization pour sécurité renforcée',
+                            'Gestion multi-devises (XOF, EUR, USD)',
+                            'Dashboard analytics temps réel'
+                        ]
+                    },
+                    {
+                        title: '💊 MyDacre - Plateforme E-Santé',
+                        list: [
+                            'Gestion des dossiers médicaux électroniques',
+                            'Système de rendez-vous en ligne',
+                            'Téléconsultation intégrée',
+                            'Intégration avec MYPP pour paiements santé'
+                        ]
+                    },
+                    {
+                        title: '🛠️ Architecture Technique',
+                        tech: ['Spring Boot', 'PostgreSQL', 'Redis', 'RabbitMQ', 'Docker', 'Angular', 'JWT', 'OAuth 2.0']
+                    }
+                ],
+                images: [
+                    'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800',
+                    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800'
+                ]
+            },
+            cpay: {
+                title: 'cPAY - Application Mobile de Paiement',
+                subtitle: 'Portefeuille mobile nouvelle génération',
+                sections: [
+                    {
+                        title: '🎯 Vision du Projet',
+                        content: `cPAY est une application mobile de paiement développée chez CAGECFI, conçue pour démocratiser l'accès aux services financiers digitaux au Togo avec une expérience utilisateur fluide et sécurisée.`
+                    },
+                    {
+                        title: '⚡ Fonctionnalités Principales',
+                        list: [
+                            'Transfert d\'argent P2P instantané',
+                            'Paiement commerçants via QR code',
+                            'Paiement de factures (eau, électricité, internet)',
+                            'Touch ID / Face ID pour sécurité',
+                            'Support multi-comptes'
+                        ]
+                    },
+                    {
+                        title: '🛠️ Stack Mobile',
+                        tech: ['Flutter', 'Dart', 'Firebase', 'REST API', 'Provider', 'QR Scanner', 'Push Notifications']
+                    }
+                ],
+                images: [
+                    'https://images.unsplash.com/photo-1556742393-d75f468bfcb0?w=800',
+                    'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800'
+                ]
+            },
+            perfect: {
+                title: 'Perfect Vision - Reporting Financier',
+                subtitle: 'Solution de reporting conforme BCEAO, CEMAC et BRB',
+                sections: [
+                    {
+                        title: '🎯 Contexte Réglementaire',
+                        content: `Perfect Vision est un système de reporting financier développé pour Next Generation Services, conforme aux exigences des banques centrales (BCEAO, CEMAC, BRB).`
+                    },
+                    {
+                        title: '📊 Modules de Reporting',
+                        list: [
+                            'Rapports prudentiels BCEAO',
+                            'États financiers CEMAC',
+                            'Reporting IFRS automatisé',
+                            'Validation des données en temps réel'
+                        ]
+                    },
+                    {
+                        title: '🛠️ Architecture',
+                        tech: ['Laravel', 'PHP', 'MySQL', 'Vue.js', 'Chart.js', 'Docker']
+                    }
+                ],
+                images: [
+                    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800',
+                    'https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800'
+                ]
+            },
+            zgate: {
+                title: 'Z-Gate & SOLAF - Systèmes Gouvernementaux',
+                subtitle: 'Plateforme de paiement pour le secteur public',
+                sections: [
+                    {
+                        title: '🎯 Mission',
+                        content: `Z-Gate est une plateforme de paiement gouvernementale développée chez CAGECFI, accompagnée de SOLAF, NextFrame et Z-Pay pour moderniser l'infrastructure du secteur public togolais.`
+                    },
+                    {
+                        title: '🏛️ Z-Gate - Portail de Paiement',
+                        list: [
+                            'Paiement des services publics en ligne',
+                            'Intégration multi-opérateurs',
+                            'Réconciliation comptable temps réel',
+                            'API pour services tiers'
+                        ]
+                    },
+                    {
+                        title: '🛠️ Stack Entreprise',
+                        tech: ['Java', 'Spring Boot', 'Microservices', 'PostgreSQL', 'Kafka', 'Angular', 'Docker']
+                    }
+                ],
+                images: [
+                    'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800',
+                    'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800'
+                ]
+            },
+            scraping: {
+                title: 'Plateforme de Collecte d\'Arrêtés',
+                subtitle: 'Web scraping et traitement intelligent de données',
+                sections: [
+                    {
+                        title: '🎯 Objectif',
+                        content: `Développement d'une plateforme automatisée de collecte, extraction et structuration d'arrêtés municipaux depuis data.gouv.fr pour RYM Holding.`
+                    },
+                    {
+                        title: '🤖 Pipeline de Scraping',
+                        list: [
+                            'API CKAN pour découverte automatique',
+                            'Rate limiting adaptatif',
+                            'Retry mechanism avec backoff',
+                            'Parallélisation des requêtes'
+                        ]
+                    },
+                    {
+                        title: '📄 Traitement Multi-Formats',
+                        list: [
+                            'Extraction PDF (PyPDF2, pdfplumber)',
+                            'OCR avec Tesseract',
+                            'Parsing CSV/Excel',
+                            'Classification automatique'
+                        ]
+                    },
+                    {
+                        title: '🛠️ Stack Technique',
+                        tech: ['Python', 'FastAPI', 'BeautifulSoup', 'Scrapy', 'PostgreSQL', 'Tesseract OCR', 'Docker']
+                    }
+                ],
+                images: [
+                    'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800',
+                    'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800'
+                ]
+            }
+        };
+
+        // Modal Functions
+        function openModal(projectKey) {
+            const modal = document.getElementById('projectModal');
+            const data = projectsData[projectKey];
+            
+            if (!data) return;
+            
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalSubtitle').textContent = data.subtitle;
+            
+            let bodyHTML = '';
+            
+            if (data.images && data.images.length > 0) {
+                bodyHTML += '<div class="modal-gallery">';
+                data.images.forEach(img => {
+                    bodyHTML += `<img src="${img}" alt="${data.title}">`;
+                });
+                bodyHTML += '</div>';
+            }
+            
+            data.sections.forEach(section => {
+                bodyHTML += `<div class="modal-section">`;
+                bodyHTML += `<h3>${section.title}</h3>`;
+                
+                if (section.content) {
+                    bodyHTML += `<p>${section.content}</p>`;
+                }
+                
+                if (section.list) {
+                    bodyHTML += '<ul>';
+                    section.list.forEach(item => {
+                        bodyHTML += `<li>${item}</li>`;
+                    });
+                    bodyHTML += '</ul>';
+                }
+                
+                if (section.tech) {
+                    bodyHTML += '<div class="modal-tech-stack">';
+                    section.tech.forEach(tech => {
+                        bodyHTML += `<span class="tag">${tech}</span>`;
+                    });
+                    bodyHTML += '</div>';
+                }
+                
+                bodyHTML += '</div>';
+            });
+            
+            document.getElementById('modalBody').innerHTML = bodyHTML;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('projectModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('projectModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Slider functionality
+        class ProjectSlider {
+            constructor(card) {
+                this.card = card;
+                this.container = card.querySelector('.slider-container');
+                this.dots = card.querySelectorAll('.dot');
+                this.currentSlide = 0;
+                this.totalSlides = card.querySelectorAll('.slide').length;
+                this.interval = null;
+                
+                this.init();
+            }
+
+            init() {
+                this.dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => this.goToSlide(index));
+                });
+
+                this.card.addEventListener('mouseenter', () => this.startAutoPlay());
+                this.card.addEventListener('mouseleave', () => this.stopAutoPlay());
+            }
+
+            goToSlide(index) {
+                this.currentSlide = index;
+                this.container.style.transform = `translateX(-${index * 100}%)`;
+                this.updateDots();
+            }
+
+            updateDots() {
+                this.dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentSlide);
+                });
+            }
+
+            nextSlide() {
+                this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+                this.goToSlide(this.currentSlide);
+            }
+
+            startAutoPlay() {
+                this.interval = setInterval(() => this.nextSlide(), 3000);
+            }
+
+            stopAutoPlay() {
+                if (this.interval) {
+                    clearInterval(this.interval);
+                    this.interval = null;
+                }
+            }
+        }
+
+        // Initialize all project sliders
+        document.querySelectorAll('.project-card').forEach(card => {
+            new ProjectSlider(card);
+        });
+
         // Smooth scrolling for navigation links
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function (e) {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-
-                // Remove active class from all links
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-
-                // Add active class to clicked link
-                this.classList.add('active');
-
-                // Smooth scroll to section
-                const targetId = this.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
-
-                if (targetSection) {
-                    targetSection.scrollIntoView({
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     });
@@ -1243,182 +1572,45 @@
             });
         });
 
-        // Animate elements on scroll
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.animate-on-scroll');
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
 
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-
-                if (elementTop < windowHeight - 100) {
-                    element.classList.add('visible');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }
+        }, observerOptions);
 
-        // Update active nav link on scroll
-        function updateActiveNavLink() {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-link');
-
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                const sectionHeight = section.clientHeight;
-
-                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        // Project card interactions
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', function () {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-
-            card.addEventListener('mouseleave', function () {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
+        // Observe project cards
+        document.querySelectorAll('.project-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(card);
         });
 
-        // Contact form submission
-        function sendMessage(event) {
-            event.preventDefault();
-
-            const form = event.target;
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData);
-
-            // Create mailto link
-            const subject = encodeURIComponent(data.subject);
-            const body = encodeURIComponent(
-                `Nom: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`
-            );
-            const mailtoLink = `mailto:kamalnadoh@gmail.com?subject=${subject}&body=${body}`;
-
-            // Open email client
-            window.location.href = mailtoLink;
-
-            // Show success message
-            const btn = form.querySelector('.submit-btn');
-            const originalText = btn.textContent;
-            btn.textContent = 'Message envoyé! ✓';
-            btn.style.background = '#28a745';
-
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
-                form.reset();
-            }, 3000);
-        }
-
-        // Initialize animations
-        window.addEventListener('scroll', () => {
-            animateOnScroll();
-            updateActiveNavLink();
+        // Observe skill categories
+        document.querySelectorAll('.skill-category').forEach((category, index) => {
+            category.style.opacity = '0';
+            category.style.transform = 'translateY(30px)';
+            category.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(category);
         });
 
-        // Run animations on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            animateOnScroll();
-            updateActiveNavLink();
-        });
-
-        // Add typing effect for subtitle
-        function typeWriter(element, text, speed = 100) {
-            let i = 0;
-            element.textContent = '';
-
-            function type() {
-                if (i < text.length) {
-                    element.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                }
-            }
-
-            type();
-        }
-
-        // Initialize typing effect
-        window.addEventListener('load', () => {
-            const subtitle = document.querySelector('.subtitle');
-            if (subtitle) {
-                const originalText = subtitle.textContent;
-                typeWriter(subtitle, originalText, 80);
-            }
-        });
-
-        // Add parallax effect to header
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const header = document.querySelector('header');
-            if (header) {
-                header.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
-
-        // Add smooth reveal animations with stagger effect
-        function staggerAnimations() {
-            const skillCategories = document.querySelectorAll('.skill-category');
-            const projectCards = document.querySelectorAll('.project-card');
-            const educationCards = document.querySelectorAll('.education-card');
-            const newSectionItems = document.querySelectorAll('.new-section-item');
-
-            [skillCategories, projectCards, educationCards, newSectionItems].forEach(nodeList => {
-                nodeList.forEach((element, index) => {
-                    element.style.animationDelay = `${index * 0.1}s`;
-                });
+        // Add click handlers for "View Details" links
+        document.querySelectorAll('.view-details').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const projectKey = this.getAttribute('data-project');
+                openModal(projectKey);
             });
-        }
-
-        // Initialize stagger animations
-        document.addEventListener('DOMContentLoaded', staggerAnimations);
-
-        // Add scroll progress indicator
-        function updateScrollProgress() {
-            const scrollTop = document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrollProgress = (scrollTop / scrollHeight) * 100;
-
-            // Create progress bar if it doesn't exist
-            let progressBar = document.querySelector('.scroll-progress');
-            if (!progressBar) {
-                progressBar = document.createElement('div');
-                progressBar.className = 'scroll-progress';
-                progressBar.style.cssText = `
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: ${scrollProgress}%;
-                    height: 3px;
-                    background: linear-gradient(135deg, #667eea, #764ba2);
-                    z-index: 9999;
-                    transition: width 0.1s ease;
-                `;
-                document.body.appendChild(progressBar);
-            } else {
-                progressBar.style.width = `${scrollProgress}%`;
-            }
-        }
-
-        // Add scroll progress to scroll event
-        window.addEventListener('scroll', () => {
-            animateOnScroll();
-            updateActiveNavLink();
-            updateScrollProgress();
         });
     </script>
 </body>
-
 </html>
